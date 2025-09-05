@@ -12,7 +12,53 @@
         <p>Generate styled HTML tables from your Excel files in seconds.</p>
     </header>
 
-    <main></main>
+    <main>
+        <!-- Step 1: Upload -->
+        <section>
+            <h2>Step 1: Upload</h2>
+            <input type="file" id="excel-file-input" accept=".xlsx, .xls" />
+            <p>Supports .xlsx and .xls files.</p>
+        </section>
+
+        <!-- Step 2: Choose Format -->
+        <section>
+            <h2>Step 2: Choose Table Format</h2>
+            <label><input type="radio" name="table_style" value="standard" checked />Standard</label><br/>
+            <label><input type="radio" name="table_style" value="uswds" />U.S. Web Design System (USWDS)</label><br/>
+            <label><input type="radio" name="table_style" value="bootstrap" />Bootstrap</label><br/>
+        </section>
+
+        <!-- Optional Settings -->
+        <section>
+            <h2>Optional Settings</h2>
+            <label><input type="checkbox" id="custom-size-toggle" />Customize dimensions</label>
+            <div id="custom-size-settings">
+                <label for="width_input">Width:</label>
+                <input type="text" id="width-input" placeholder="e.g. 100%" />
+                <label for="height_input">Height:</label>
+                <input type="text" id="height-input" placeholder="e.g. 400px or auto" />
+            </div>
+            <br />
+            <label><input type="checkbox" id="search-toggle" />Enable Search</label>
+        </section>
+
+        <!-- Preview -->
+        <section>
+            <h2>Preview</h2>
+            <div id="preview-container">
+                <!-- Live table output goes here -->
+            </div>
+        </section>
+
+        <!-- Generated HTML -->
+        <section>
+            <h2>Step 3: Copy the HTML Code</h2>
+            <textarea id="html-output" readonly></textarea><br/>
+            <button id="copy-button">Copy to Clipboard</button>
+            <button id="reset-button">Reset All</button>
+        </section>
+
+    </main>
 
     <footer>
         <p>&copy; 2025 Excel-to-HTML Converter</p>
