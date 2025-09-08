@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excel-to-HTML Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css"/>
 </head>
-<body>
-    <header>
-        <h1>Excel-to-HTML Converter</h1>
-        <p>Generate styled HTML tables from your Excel files in seconds.</p>
+<body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
+    <header class="bg-blue-700 text-white text-center py-4 shadow-md">
+        <div class="max-w-4xl mx-auto px-4">
+            <h1 class="text-2xl font-bold">Excel-to-HTML Converter</h1>
+            <p class="text-sm text-blue-100">Generate styled HTML tables from your Excel files in seconds.</p>
+        </div>
     </header>
 
     <main>
@@ -60,8 +63,8 @@
 
     </main>
 
-    <footer>
-        <p>&copy; 2025 Excel-to-HTML Converter</p>
+    <footer class="bg-gray-800 text-white text-center py-4">
+        <p class="text-sm">&copy; 2025 Excel-to-HTML Converter</p>
     </footer>
 
     <script type="module" src="js/main.js"></script>
