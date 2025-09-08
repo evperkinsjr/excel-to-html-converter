@@ -23,26 +23,26 @@
             <p class="text-sm text-gray-600">Supports .xlsx and .xls files.</p>
         </section>
 
-        <!-- Step 2: Choose Format -->
+        <!-- Step 2: Choose Table Settings -->
         <section>
-            <h2>Step 2: Choose Table Format</h2>
-            <label><input type="radio" name="table_style" value="standard" checked />Standard</label><br/>
-            <label><input type="radio" name="table_style" value="uswds" />U.S. Web Design System (USWDS)</label><br/>
-            <label><input type="radio" name="table_style" value="bootstrap" />Bootstrap</label><br/>
-        </section>
-
-        <!-- Optional Settings -->
-        <section>
-            <h2>Optional Settings</h2>
-            <label><input type="checkbox" id="custom-size-toggle" />Customize dimensions</label>
-            <div id="custom-size-settings">
-                <label for="width_input">Width:</label>
-                <input type="text" id="width-input" placeholder="e.g. 100%" />
-                <label for="height_input">Height:</label>
-                <input type="text" id="height-input" placeholder="e.g. 400px or auto" />
+            <h2>Table Settings</h2>
+            <div>
+                <label for="width">Width:</label>
+                <input type="text" id="width" placeholder="e.g. 100%" />
+                <label for="height">Height:</label>
+                <input type="text" id="height" placeholder="e.g. 400px or auto" />
             </div>
-            <br />
-            <label><input type="checkbox" id="search-toggle" />Enable Search</label>
+            <div>
+                <label for="style">Formatting Style</label>
+                <select id="style">
+                    <option value="standard">Standard</option>
+                    <option value="uswds">U.S. Web Design System</option>
+                    <option value="bootstrap">Bootstrap</option>
+                </select>
+            </div>
+            <div>
+                <label><input type="checkbox" id="enable-search" />Enable Search</label>
+            </div>
         </section>
 
         <!-- Preview -->
