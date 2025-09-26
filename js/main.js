@@ -4,6 +4,7 @@ import { bindUI } from "./uiController.js";
 
 const refs = {
     file: document.getElementById('excel-file-input'),
+    enableSearch: document.getElementById('enable-search'),
     convertBtn: document.getElementById('convert-btn'),
     previewBox: document.getElementById('preview-box'),
     outputBox: document.getElementById('output-box')
@@ -16,7 +17,7 @@ async function handleConvert() {
     const sheet = wb.Sheets[sheetName];
     const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, blankrows: false });
 
-    const { tableEl, htmlString } = rowsToHTMLTable(rows);
+    const { tableEl, htmlString } = rowsToHTMLTable(rows, { searchable: refs.enableSearch.checked });
 
     // Preview
     refs.previewBox.appendChild(tableEl);

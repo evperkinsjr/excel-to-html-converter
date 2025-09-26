@@ -4,7 +4,7 @@ function createCell(tag, text) {
     return el;
 }
 
-export function rowsToHTMLTable(rows) {
+export function rowsToHTMLTable(rows, { searchable = false } = {}) {
     if (!rows || !rows.length) return alert('We couldn\'t find any data rows in this worksheet.');
     const table = document.createElement('table');
     const thead = document.createElement('thead');
@@ -25,6 +25,24 @@ export function rowsToHTMLTable(rows) {
 
     table.appendChild(thead);
     table.appendChild(tbody);
+
+    // Optional - search input
+    if (searchable) {
+        const input = document.createElement('input');
+        input.type = 'search';
+        input.placeholder = 'Search table...';
+        input.addEventListener('input', () => {
+            const q = input.value.toLowerCase();
+            for (const row of tbody.rows) {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(q) ? '' : 'none';
+            }
+        });
+        const wrapper = document.createElement('div');
+        wrapper.appendChild(input);
+        wrapper.appendChild(table);
+        return { tableEl: wrapper, htmlString: wrapper.outerHTML };
+    }
 
     return { tableEl: table, htmlString: table.outerHTML };
 }
