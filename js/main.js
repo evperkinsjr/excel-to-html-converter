@@ -10,6 +10,7 @@ const refs = {
 }
 
 async function handleConvert() {
+    if (!refs.file.files?.[0]) return alert('Please choose an Excel file');
     const wb = await readWorkbook(refs.file.files[0]);
     const sheetName = wb.SheetNames[0];
     const sheet = wb.Sheets[sheetName];
@@ -19,7 +20,7 @@ async function handleConvert() {
 
     // Preview
     refs.previewBox.appendChild(tableEl);
-    
+
     // HTML output
     const outNode = tableEl;
     refs.outputBox.value = outNode.outerHTML;
