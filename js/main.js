@@ -1,17 +1,28 @@
 import { readWorkbook } from "./fileReader.js";
+import { rowsToHTMLTable } from "./htmlGenerator.js";
 import { bindUI } from "./uiController.js";
 
 const refs = {
     file: document.getElementById('excel-file-input'),
     convertBtn: document.getElementById('convert-btn'),
+    previewBox: document.getElementById('preview-box'),
+    outputBox: document.getElementById('output-box')
 }
 
 async function handleConvert() {
     const wb = await readWorkbook(refs.file.files[0]);
     const sheetName = wb.SheetNames[0];
     const sheet = wb.Sheets[sheetName];
+    const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, blankrows: false });
 
-    console.log(sheet);
+    const { tableEl, htmlString } = rowsToHTMLTable(rows);
+
+    // Preview
+    refs.previewBox.appendChild(tableEl);
+    
+    // HTML output
+    const outNode = tableEl;
+    refs.outputBox.value = outNode.outerHTML;
 }
 
 bindUI({
