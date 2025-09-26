@@ -1,9 +1,11 @@
 import { readWorkbook } from "./fileReader.js";
 import { rowsToHTMLTable } from "./htmlGenerator.js";
+import { applyTheme } from "./tableFormatter.js";
 import { bindUI } from "./uiController.js";
 
 const refs = {
     file: document.getElementById('excel-file-input'),
+    theme: document.getElementById('theme'),
     enableSearch: document.getElementById('enable-search'),
     convertBtn: document.getElementById('convert-btn'),
     previewBox: document.getElementById('preview-box'),
@@ -18,6 +20,9 @@ async function handleConvert() {
     const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, blankrows: false });
 
     const { tableEl, htmlString } = rowsToHTMLTable(rows, { searchable: refs.enableSearch.checked });
+
+    // apply formatting style (theme)
+    applyTheme(tableEl, refs.theme.value);
 
     // Preview
     refs.previewBox.appendChild(tableEl);
