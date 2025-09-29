@@ -2,20 +2,39 @@ export function applyTheme(node, theme) {
     // Check to find the table
     const table = node.tagName === 'TABLE' ? node : node.querySelector('table');
 
+    // Check to find the search input
+    let input = null;
+    if (node.tagName !== 'TABLE') {
+        input = node.querySelector('input[type="search"]');
+    }
+
     // Clear previous styling classes
     table.removeAttribute('class');
+    if (input) input.removeAttribute('class');
 
     switch(theme) {
         case 'tailwind':
-            // Neutral Tailwind styling
+            // Table styling
             table.classList.add('min-w-full', 'border', 'border-gray-300');
             table.querySelectorAll('th').forEach(th => th.classList.add('border', 'border-gray-300', 'bg-gray-100', 'text-left', 'p-2'));
             table.querySelectorAll('td').forEach(td => td.classList.add('border', 'border-gray-200', 'p-2'));
+
+            // Search input styling
+            if (input) {
+                input.classList.add('mb-2', 'px-2', 'py-1', 'border', 'rounded', 'focus:ring-blue-500');
+            }
+
             break;
 
         case 'uswds':
-            // Striped USWDS table styling
+            // Striped table styling
             table.classList.add('usa-table', 'usa-table--striped');
+
+            // Search input styling
+            if (input) {
+                input.classList.add('usa-input');
+            }
+            
             break;
 
         default:
