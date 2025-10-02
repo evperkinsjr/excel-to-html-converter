@@ -1,0 +1,42 @@
+/*
+ * Custom style to mimic USWDS for table and input only
+ * Loaded only when the USWDS them is selected
+ */
+
+/* Table Base */
+.usa-table {
+    color: #1B1B1B;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.06rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    line-height: 1.5;
+    text-align: left;
+}
+
+/* Table head */
+.usa-table thead {
+    font-weight: 700;
+}
+
+/* Table body */
+.usa-table tbody {
+    vertical-align: middle;
+}
+
+/* Table data */
+.usa-table th, td  {
+    border: 1px solid #1b1b1b;
+    padding: 0.5rem 1rem;
+}
+
+/* Form Input */
+.usa-input {
+    color: #1B1B1B;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.06rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    line-height: 1.5rem;
+    padding: .5rem;
+}
