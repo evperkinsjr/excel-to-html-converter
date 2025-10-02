@@ -2,6 +2,7 @@ import { readWorkbook } from "./fileReader.js";
 import { rowsToHTMLTable } from "./htmlGenerator.js";
 import { applyTheme } from "./tableFormatter.js";
 import { bindUI } from "./uiController.js";
+import { loadThemeAssets } from "./utils.js";
 
 const refs = {
     file: document.getElementById('excel-file-input'),
@@ -19,10 +20,19 @@ async function handleConvert() {
     const sheet = wb.Sheets[sheetName];
     const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, blankrows: false });
 
-    const { tableEl, htmlString } = rowsToHTMLTable(rows, { searchable: refs.enableSearch.checked });
+    //Store selected theme
+    const selectedTheme = refs.theme.value;
+
+    // Load external assets based on selected theme
+    loadThemeAssets(selectedTheme);
+
+    const { tableEl, htmlString } = rowsToHTMLTable(rows, {
+        searchable: refs.enableSearch.checked,
+        theme: selectedTheme
+    });
 
     // apply formatting style (theme)
-    applyTheme(tableEl, refs.theme.value);
+    applyTheme(tableEl, selectedTheme);
 
     // Preview
     refs.previewBox.appendChild(tableEl);
