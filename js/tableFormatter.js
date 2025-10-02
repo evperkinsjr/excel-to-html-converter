@@ -27,8 +27,8 @@ export function applyTheme(node, theme) {
             break;
 
         case 'uswds':
-            // Striped table styling
-            table.classList.add('usa-table', 'usa-table--striped');
+            // Standard table styling
+            table.classList.add('usa-table');
 
             // Search input styling
             if (input) {
