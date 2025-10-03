@@ -6,6 +6,8 @@ import { loadThemeAssets } from "./utils.js";
 
 const refs = {
     file: document.getElementById('excel-file-input'),
+    width: document.getElementById('width'),
+    height: document.getElementById('height'),
     theme: document.getElementById('theme'),
     enableSearch: document.getElementById('enable-search'),
     convertBtn: document.getElementById('convert-btn'),
@@ -34,11 +36,24 @@ async function handleConvert() {
     // apply formatting style (theme)
     applyTheme(tableEl, selectedTheme);
 
-    // Preview
-    refs.previewBox.appendChild(tableEl);
+    // table size dimensions
+    const width = refs.width.value;
+    const height = refs.height.value;
+    tableEl.style.width = width;
+    if (height) {
+        const wrapper = document.createElement('div');
+        wrapper.style.maxHeight = height;
+        wrapper.style.overflow = 'auto';
+        wrapper.appendChild(tableEl);
+        refs.previewBox.innerHTML = '';
+        refs.previewBox.appendChild(wrapper);
+    } else {
+        refs.previewBox.innerHTML = '';
+        refs.previewBox.appendChild(tableEl);
+    }
 
     // HTML output
-    const outNode = tableEl;
+    const outNode = height ? refs.previewBox.firstChild : tableEl;
     refs.outputBox.value = outNode.outerHTML;
 }
 
