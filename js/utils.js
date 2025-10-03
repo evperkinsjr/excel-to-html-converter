@@ -22,5 +22,8 @@ export function sanitizeCssSize(value) {
     if (/^\d+$/.test(v)) return `${v}px`; // plain number to px
     if (/^\d+%$/.test(v)) return v; // percentage
     if (/^\d+(\.\d+)?(px|rem|em|vh|vw)$/.test(v)) return v; // valid unit
+
+    // notify user of invalid input
+    alert(`CSS size input "${value}" is invalid. Using default size.`);
     return ''; // fallback to default styling if value fails all checks
 }
