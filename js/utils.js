@@ -1,3 +1,16 @@
+const validExcelExtensions = ['.xlsx', '.xls', '.xlsm', '.xlsb'];
+
+// Check if file object has a valid excel file extension
+export function isValidExcelFile(file) {
+    if (!file || !file.name) {
+        return false;
+    }
+    const fileName = file.name.toLowerCase();
+
+    // Check file name extension
+    return validExcelExtensions.some(ext => fileName.endsWith(ext));
+}
+
 const loadedAssets = new Set();
 
 export function loadThemeAssets(theme) {

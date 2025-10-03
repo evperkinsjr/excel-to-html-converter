@@ -2,7 +2,7 @@ import { readWorkbook } from "./fileReader.js";
 import { rowsToHTMLTable } from "./htmlGenerator.js";
 import { applyTheme } from "./tableFormatter.js";
 import { bindUI } from "./uiController.js";
-import { loadThemeAssets, sanitizeCssSize } from "./utils.js";
+import { isValidExcelFile, loadThemeAssets, sanitizeCssSize } from "./utils.js";
 
 const refs = {
     file: document.getElementById('excel-file-input'),
@@ -16,8 +16,12 @@ const refs = {
 }
 
 async function handleConvert() {
-    if (!refs.file.files?.[0]) return alert('Please choose an Excel file');
-    const wb = await readWorkbook(refs.file.files[0]);
+    const file = refs.file.files?.[0];
+
+    // File and file type check
+    if (!file) return alert('Please choose an Excel file');
+    if (!isValidExcelFile(file)) return alert('The selected file does not appear to a valid Excel spreadsheet (.xlsx, .xls). Please select a different file.');
+    const wb = await readWorkbook(file);
     const sheetName = wb.SheetNames[0];
     const sheet = wb.Sheets[sheetName];
     const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, blankrows: false });
