@@ -2,7 +2,7 @@ import { readWorkbook } from "./fileReader.js";
 import { rowsToHTMLTable } from "./htmlGenerator.js";
 import { applyTheme } from "./tableFormatter.js";
 import { bindUI } from "./uiController.js";
-import { loadThemeAssets } from "./utils.js";
+import { loadThemeAssets, sanitizeCssSize } from "./utils.js";
 
 const refs = {
     file: document.getElementById('excel-file-input'),
@@ -37,8 +37,8 @@ async function handleConvert() {
     applyTheme(tableEl, selectedTheme);
 
     // table size dimensions
-    const width = refs.width.value;
-    const height = refs.height.value;
+    const width = sanitizeCssSize(refs.width.value);
+    const height = sanitizeCssSize(refs.height.value);
     tableEl.style.width = width;
     if (height) {
         const wrapper = document.createElement('div');

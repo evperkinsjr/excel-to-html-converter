@@ -15,3 +15,12 @@ export function loadThemeAssets(theme) {
         loadedAssets.add(cssUrl);
     }
 }
+
+export function sanitizeCssSize(value) {
+    const v = (value || '').toString().trim();
+    if (!v) return '';
+    if (/^\d+$/.test(v)) return `${v}px`; // plain number to px
+    if (/^\d+%$/.test(v)) return v; // percentage
+    if (/^\d+(\.\d+)?(px|rem|em|vh|vw)$/.test(v)) return v; // valid unit
+    return ''; // fallback to default styling if value fails all checks
+}
