@@ -15,12 +15,22 @@ const refs = {
     outputBox: document.getElementById('output-box')
 }
 
+function handleFileChange() {
+    const file = refs.file.files?.[0];
+
+    if (file && !isValidExcelFile(file)) {
+        alert('The selected file does not appear to a valid Excel spreadsheet (.xlsx, .xls). Please select a different file.');
+
+        refs.file.value = '';
+    }
+}
+
 async function handleConvert() {
     const file = refs.file.files?.[0];
 
-    // File and file type check
+    // File check
     if (!file) return alert('Please choose an Excel file');
-    if (!isValidExcelFile(file)) return alert('The selected file does not appear to a valid Excel spreadsheet (.xlsx, .xls). Please select a different file.');
+    
     const wb = await readWorkbook(file);
     const sheetName = wb.SheetNames[0];
     const sheet = wb.Sheets[sheetName];
@@ -62,6 +72,7 @@ async function handleConvert() {
 }
 
 bindUI({
+    onChange: handleFileChange,
     onConvert: handleConvert,
     refs
 });
