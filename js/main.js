@@ -74,7 +74,7 @@ async function handleConvert() {
 
 bindUI({
     onChange: handleFileChange,
-    onReset: resetUI,
+    onReset: () => resetUI(refs),
     onConvert: handleConvert,
     refs
 });
