@@ -11,6 +11,16 @@ export function isValidExcelFile(file) {
     return validExcelExtensions.some(ext => fileName.endsWith(ext));
 }
 
+export function resetUI(refs) {
+    refs.file.value = '';
+    refs.width.value = '';
+    refs.height.value = '';
+    refs.theme.value = 'unstyled';
+    refs.enableSearch.checked = false;
+    refs.previewBox.innerHTML = '';
+    refs.outputBox.value = '';
+}
+
 const loadedAssets = new Set();
 
 export function loadThemeAssets(theme) {

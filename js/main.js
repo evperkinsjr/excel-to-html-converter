@@ -2,7 +2,7 @@ import { readWorkbook } from "./fileReader.js";
 import { rowsToHTMLTable } from "./htmlGenerator.js";
 import { applyTheme } from "./tableFormatter.js";
 import { bindUI } from "./uiController.js";
-import { isValidExcelFile, loadThemeAssets, sanitizeCssSize } from "./utils.js";
+import { isValidExcelFile, resetUI, loadThemeAssets, sanitizeCssSize } from "./utils.js";
 
 const refs = {
     file: document.getElementById('excel-file-input'),
@@ -10,6 +10,7 @@ const refs = {
     height: document.getElementById('height'),
     theme: document.getElementById('theme'),
     enableSearch: document.getElementById('enable-search'),
+    resetBtn: document.getElementById('reset-btn'),
     convertBtn: document.getElementById('convert-btn'),
     previewBox: document.getElementById('preview-box'),
     outputBox: document.getElementById('output-box')
@@ -73,6 +74,7 @@ async function handleConvert() {
 
 bindUI({
     onChange: handleFileChange,
+    onReset: resetUI,
     onConvert: handleConvert,
     refs
 });
