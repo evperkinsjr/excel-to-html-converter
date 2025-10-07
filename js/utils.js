@@ -1,6 +1,8 @@
-const validExcelExtensions = ['.xlsx', '.xls', '.xlsm', '.xlsb'];
+// Notify user of something
 
 // Check if file object has a valid excel file extension
+const validExcelExtensions = ['.xlsx', '.xls', '.xlsm', '.xlsb'];
+
 export function isValidExcelFile(file) {
     if (!file || !file.name) {
         return false;
@@ -11,6 +13,7 @@ export function isValidExcelFile(file) {
     return validExcelExtensions.some(ext => fileName.endsWith(ext));
 }
 
+// Reset
 export function resetUI(refs) {
     refs.file.value = '';
     refs.width.value = '';
@@ -21,6 +24,7 @@ export function resetUI(refs) {
     refs.outputBox.value = '';
 }
 
+// Load CSS file based on selected theme
 const loadedAssets = new Set();
 
 export function loadThemeAssets(theme) {
@@ -39,6 +43,7 @@ export function loadThemeAssets(theme) {
     }
 }
 
+// Sanitize CSS inputs
 export function sanitizeCssSize(value) {
     const v = (value || '').toString().trim();
     if (!v) return '';
@@ -51,6 +56,7 @@ export function sanitizeCssSize(value) {
     return ''; // fallback to default styling if value fails all checks
 }
 
+// Copy HTML output to clipboard
 export function copyToClipboard(text) {
     if (!text) return;
     navigator.clipboard.writeText(text).then(
