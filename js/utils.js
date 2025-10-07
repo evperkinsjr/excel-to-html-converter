@@ -52,7 +52,9 @@ export function sanitizeCssSize(value) {
 }
 
 export function copyToClipboard(text) {
+    if (!text) return;
     navigator.clipboard.writeText(text).then(
-        () => alert('HTML copied to clipboard')
-    )
+        () => alert('HTML copied to clipboard'),
+        () => alert('Copy failed. Please select and copy manually.')
+    );
 }
