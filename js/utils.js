@@ -50,3 +50,9 @@ export function sanitizeCssSize(value) {
     alert(`CSS size input "${value}" is invalid. Using default size.`);
     return ''; // fallback to default styling if value fails all checks
 }
+
+export function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(
+        () => alert('HTML copied to clipboard')
+    )
+}

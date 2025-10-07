@@ -2,7 +2,7 @@ import { readWorkbook } from "./fileReader.js";
 import { rowsToHTMLTable } from "./htmlGenerator.js";
 import { applyTheme } from "./tableFormatter.js";
 import { bindUI } from "./uiController.js";
-import { isValidExcelFile, resetUI, loadThemeAssets, sanitizeCssSize } from "./utils.js";
+import { isValidExcelFile, resetUI, loadThemeAssets, sanitizeCssSize, copyToClipboard } from "./utils.js";
 
 const refs = {
     file: document.getElementById('excel-file-input'),
@@ -13,8 +13,9 @@ const refs = {
     resetBtn: document.getElementById('reset-btn'),
     convertBtn: document.getElementById('convert-btn'),
     previewBox: document.getElementById('preview-box'),
-    outputBox: document.getElementById('output-box')
-}
+    outputBox: document.getElementById('output-box'),
+    copyBtn: document.getElementById('copy-btn')
+};
 
 function handleFileChange() {
     const file = refs.file.files?.[0];
@@ -76,5 +77,6 @@ bindUI({
     onChange: handleFileChange,
     onReset: () => resetUI(refs),
     onConvert: handleConvert,
+    onCopy: () => copyToClipboard(refs.outputBox.value),
     refs
 });
