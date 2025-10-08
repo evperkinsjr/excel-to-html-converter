@@ -49,13 +49,13 @@ export function isValidExcelFile(file) {
 
 // Reset
 export function resetUI(refs) {
-    refs.file.value = '';
-    refs.width.value = '';
-    refs.height.value = '';
-    refs.theme.value = 'unstyled';
-    refs.enableSearch.checked = false;
-    refs.previewBox.innerHTML = '';
-    refs.outputBox.value = '';
+    if (refs.file) refs.file.value = '';
+    if (refs.width) refs.width.value = '';
+    if (refs.height) refs.height.value = '';
+    if (refs.theme) refs.theme.value = 'unstyled';
+    if (refs.enableSearch) refs.enableSearch.checked = false;
+    if (refs.previewBox) refs.previewBox.innerHTML = '';
+    if (refs.outputBox) refs.outputBox.value = '';
 }
 
 // Load CSS file based on selected theme
