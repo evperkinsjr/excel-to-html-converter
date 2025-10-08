@@ -2,7 +2,7 @@ import { readWorkbook } from "./fileReader.js";
 import { rowsToHTMLTable } from "./htmlGenerator.js";
 import { applyTheme } from "./tableFormatter.js";
 import { bindUI } from "./uiController.js";
-import { showNotification, isValidExcelFile, resetUI, loadThemeAssets, sanitizeCssSize, copyToClipboard } from "./utils.js";
+import { showNotification, isValidExcelFile, resetUI, loadThemeAssets, sanitizeCssSize, copyToClipboard, makeTableSortable } from "./utils.js";
 
 const refs = {
     file: document.getElementById('excel-file-input'),
@@ -56,6 +56,14 @@ async function handleConvert() {
     const width = sanitizeCssSize(refs.width.value);
     const height = sanitizeCssSize(refs.height.value);
     tableEl.style.width = width;
+
+    // Determine the element that holds the table (in case it's wrapped)
+    const previewTable = tableEl.tagName === 'TABLE' ? tableEl : tableEl.querySelector('table');
+
+    // Make the preview table sortable
+    makeTableSortable(previewTable);
+
+    // Insert into preview box
     if (height) {
         const wrapper = document.createElement('div');
         wrapper.style.maxHeight = height;

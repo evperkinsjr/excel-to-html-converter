@@ -98,3 +98,54 @@ export function copyToClipboard(text) {
         () => showNotification('Copy failed. Please select and copy manually.', 'error')
     );
 }
+
+// Makes the HTML table (in preview) sortable by clicking its headers
+export function makeTableSortable(table) {
+    if (!table || table.tagName !== 'TABLE') return;
+
+    // Helper to compare values (handles numbers vs strings)
+    const compareValues = (valA, valB) => {
+        const numA = parseFloat(valA);
+        const numB = parseFloat(valB);
+        if (!isNaN(numA) && !isNaN(numB)) {
+            return numA - numB;
+        }
+        return valA.localeCompare(valB);
+    };
+
+    const headers = table.querySelectorAll('th');
+    
+    headers.forEach((header, columnIndex) => {
+        header.style.cursor = 'pointer'; 
+        header.setAttribute('data-sort-direction', 'none'); // 'none', 'asc', or 'desc'
+
+        header.addEventListener('click', () => {
+            const tbody = table.querySelector('tbody');
+            if (!tbody) return;
+
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            let direction = header.getAttribute('data-sort-direction');
+
+            const newDirection = (direction === 'asc' || direction === 'none') ? 'desc' : 'asc';
+
+            // Clear sorting indicators from all headers
+            table.querySelectorAll('th').forEach(th => th.removeAttribute('data-sort-direction'));
+            
+            // Set new direction on current header
+            header.setAttribute('data-sort-direction', newDirection);
+
+            // Sorting logic
+            rows.sort((rowA, rowB) => {
+                const cellA = rowA.cells[columnIndex].textContent.trim();
+                const cellB = rowB.cells[columnIndex].textContent.trim();
+                
+                let comparison = compareValues(cellA, cellB);
+                
+                return newDirection === 'asc' ? comparison : comparison * -1;
+            });
+
+            // Re-append sorted rows
+            rows.forEach(row => tbody.appendChild(row));
+        });
+    });
+}
