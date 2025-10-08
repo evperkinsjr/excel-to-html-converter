@@ -1,4 +1,18 @@
 // Notify user of something
+export function showNotification(message, type) {
+    const notificationContainer = document.body;
+    if (!notificationContainer) return;
+
+    const alertDiv = document.createElement('div');
+    
+    alertDiv.textContent = message;
+
+    notificationContainer.prepend(alertDiv);
+
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 5000);
+}
 
 // Check if file object has a valid excel file extension
 const validExcelExtensions = ['.xlsx', '.xls', '.xlsm', '.xlsb'];

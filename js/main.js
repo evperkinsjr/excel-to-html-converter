@@ -2,7 +2,7 @@ import { readWorkbook } from "./fileReader.js";
 import { rowsToHTMLTable } from "./htmlGenerator.js";
 import { applyTheme } from "./tableFormatter.js";
 import { bindUI } from "./uiController.js";
-import { isValidExcelFile, resetUI, loadThemeAssets, sanitizeCssSize, copyToClipboard } from "./utils.js";
+import { showNotification, isValidExcelFile, resetUI, loadThemeAssets, sanitizeCssSize, copyToClipboard } from "./utils.js";
 
 const refs = {
     file: document.getElementById('excel-file-input'),
@@ -21,7 +21,7 @@ function handleFileChange() {
     const file = refs.file.files?.[0];
 
     if (file && !isValidExcelFile(file)) {
-        alert('The selected file does not appear to a valid Excel spreadsheet (.xlsx, .xls). Please select a different file.');
+        showNotification('The selected file does not appear to a valid Excel spreadsheet (.xlsx, .xls). Please select a different file.', 'error');
 
         refs.file.value = '';
     }
