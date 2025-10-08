@@ -3,7 +3,24 @@ export function showNotification(message, type) {
     const notificationContainer = document.body;
     if (!notificationContainer) return;
 
+    let themeClasses;
+    switch (type) {
+        case 'error':
+            themeClasses = 'bg-red-900 text-red-100 border-red-300';
+            break;
+        case 'success':
+            themeClasses = 'bg-green-900 text-green-100 border-green-300';
+            break;
+        case 'warn':
+            themeClasses = 'bg-yellow-300 text-yellow-900 border-yellow-300';
+            break;
+        default:
+            themeClasses = 'bg-blue-900 text-blue-100 border-blue-300';
+            break;
+    }
+
     const alertDiv = document.createElement('div');
+    alertDiv.className = `custom-notification fixed top-4 right-4 z-10 rounded-md p-4 mb-4 text-sm shadow-lg border ${themeClasses} font-medium w-11/12 md:w-1/4 max-w-sm`;
     
     alertDiv.textContent = message;
 
