@@ -3,6 +3,9 @@ export function showNotification(message, type) {
     const notificationContainer = document.body;
     if (!notificationContainer) return;
 
+    const existing = document.querySelector('.custom-notification');
+    if (existing) existing.remove();
+
     let themeClasses;
     switch (type) {
         case 'error':
