@@ -31,7 +31,7 @@ async function handleConvert() {
     const file = refs.file.files?.[0];
 
     // File check
-    if (!file) return alert('Please choose an Excel file');
+    if (!file) return showNotification('Please choose an Excel file', 'warn');
     
     const wb = await readWorkbook(file);
     const sheetName = wb.SheetNames[0];

@@ -1,3 +1,5 @@
+import { showNotification } from "./utils.js";
+
 function createCell(tag, text) {
     const el = document.createElement(tag);
     el.textContent = text ?? '';
@@ -5,7 +7,7 @@ function createCell(tag, text) {
 }
 
 export function rowsToHTMLTable(rows, { searchable = false } = {}) {
-    if (!rows || !rows.length) return alert('We couldn\'t find any data rows in this worksheet.');
+    if (!rows || !rows.length) return showNotification('We couldn\'t find any data rows in this worksheet.', 'error');
     const table = document.createElement('table');
     const thead = document.createElement('thead');
     const tbody = document.createElement('tbody');

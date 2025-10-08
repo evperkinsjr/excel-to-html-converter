@@ -86,7 +86,7 @@ export function sanitizeCssSize(value) {
     if (/^\d+(\.\d+)?(px|rem|em|vh|vw)$/.test(v)) return v; // valid unit
 
     // notify user of invalid input
-    alert(`CSS size input "${value}" is invalid. Using default size.`);
+    showNotification(`CSS size input "${value}" is invalid. Using default size.`, 'warn');
     return ''; // fallback to default styling if value fails all checks
 }
 
@@ -94,7 +94,7 @@ export function sanitizeCssSize(value) {
 export function copyToClipboard(text) {
     if (!text) return;
     navigator.clipboard.writeText(text).then(
-        () => alert('HTML copied to clipboard'),
-        () => alert('Copy failed. Please select and copy manually.')
+        () => showNotification('HTML copied to clipboard', 'success'),
+        () => showNotification('Copy failed. Please select and copy manually.', 'error')
     );
 }
