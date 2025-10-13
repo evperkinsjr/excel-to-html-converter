@@ -56,6 +56,9 @@ export function resetUI(refs) {
     if (refs.enableSearch) refs.enableSearch.checked = false;
     if (refs.previewBox) refs.previewBox.innerHTML = '';
     if (refs.outputBox) refs.outputBox.value = '';
+    if (refs.setupBlock) refs.setupBlock.classList.remove('hidden');
+    if (refs.loadingBlock) refs.loadingBlock.classList.add('hidden');
+    if (refs.resultsBlock) refs.resultsBlock.classList.add('hidden');
 }
 
 // Load CSS file based on selected theme
