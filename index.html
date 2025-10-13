@@ -16,46 +16,60 @@
         </div>
     </header>
 
-    <main class="flex-grow max-w-4xl mx-auto px-4 py-6">
-        <!-- Step 1: Upload Excel File -->
-        <section class="mb-6 bg-white p-4 rounded shadow">
-            <h2 class="text-xl font-semibold mb-2">Upload Excel File</h2>
-            <input type="file" id="excel-file-input" accept=".xlsx, .xls" class="block w-full text-sm text-gray-700 mb-2" />
-            <p class="text-sm text-gray-600">Supports .xlsx and .xls files.</p>
-        </section>
+    <main class="flex-grow max-w-4xl mx-auto px-4 py-6 space-y-6">
 
-        <!-- Step 2: Choose Table Settings -->
-        <section class="mb-6 bg-white p-4 rounded shadow">
-            <h2 class="text-xl font-semibold mb-2">Table Settings</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                    <label for="width" class="block text-sm font-medium">Width (px or %)</label>
-                    <input type="text" id="width" placeholder="e.g., 100% or 800" class="mt-1 w-full px-2 py-1 border rounded">
+        <!-- Setup Block -->
+        <section id="setup-block" class="space-y-4">
+            <h2 class="text-xl font-bold">Upload File & Configure Table</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Step 1: Upload Excel File -->
+                <div class="bg-white rounded shadow p-4 space-y-2">
+                    <label for="excel-file-input" class="block font-semibold">Choose Excel File:</label>
+                    <input type="file" id="excel-file-input" accept=".xlsx, .xls" class="w-full p-2 border rounded bg-gray-50" />
+                    <p class="text-sm text-gray-600">Supports .xlsx and .xls files.</p>
                 </div>
-                <div>
-                    <label for="height" class="block text-sm font-medium">Height (px)</label>
-                    <input type="text" id="height" placeholder="e.g., 400" class="mt-1 w-full px-2 py-1 border rounded">
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="theme" class="block text-sm font-medium">Formatting Style</label>
-                    <select id="theme" class="mt-1 w-full px-2 py-1 border rounded">
-                        <option value="unstyled">Unstyled (plain HTML)</option>
+
+                <!-- Step 2: Choose Table Settings -->
+                <div class="bg-white rounded shadow p-4 space-y-4">
+                    <h3 class="block font-semibold">Table Settings:</h3>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="width" class="block text-sm">Width (px or %)</label>
+                            <input type="text" id="width" placeholder="e.g., 100% or 800" class="w-full p-2 border rounded bg-gray-50">
+                        </div>
+                        <div>
+                            <label for="height" class="block text-sm">Height (px)</label>
+                            <input type="text" id="height" placeholder="e.g., 400" class="w-full p-2 border rounded bg-gray-50">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="theme" class="block text-sm">Formatting Style:</label>
+                        <select id="theme" class="w-full p-2 border rounded bg-gray-50">
+                        <option value="unstyled">Unstyled (Plain HTML)</option>
                         <option value="tailwind">Tailwind CSS</option>
-                        <option value="uswds">U.S. Web Design System</option>
-                    </select>
-                </div>
-                <div class="sm:col-span-2">
-                    <label class="inline-flex items-center gap-2 text-sm">
-                        <input type="checkbox" id="enable-search" class="rounded border-gray-300"/>Enable Search</label>
+                        <option value="uswds">USWDS</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <input type="checkbox" id="enable-search" class="h-4 w-4" />
+                        <label for="enable-search" class="text-sm">Enable Search</label>
+                    </div>
+
+                    <!-- Step 3: Convert -->
+                    <div class="pt-4 flex justify-end">
+                        <button id="convert-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded">Convert to HTML</button>
+                    </div>
+                    
                 </div>
             </div>
+            
         </section>
 
-        <!-- Step 3: Convert -->
-        <section class="mb-6 bg-white p-4 rounded shadow">
-            <button id="convert-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded">Convert to HTML</button>
-        </section>
-
+        <!-- Results Block -->
         <!-- Preview -->
         <section class="mb-6 bg-white p-4 rounded shadow">
             <h2 class="text-xl font-semibold mb-2">Preview</h2>
