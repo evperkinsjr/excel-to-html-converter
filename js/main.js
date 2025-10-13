@@ -5,6 +5,9 @@ import { bindUI } from "./uiController.js";
 import { showNotification, isValidExcelFile, resetUI, loadThemeAssets, sanitizeCssSize, copyToClipboard, makeTableSortable } from "./utils.js";
 
 const refs = {
+    setupBlock: document.getElementById('setup-block'),
+    loadingBlock: document.getElementById('loading-block'),
+    resultsBlock: document.getElementById('results-block'),
     file: document.getElementById('excel-file-input'),
     width: document.getElementById('width'),
     height: document.getElementById('height'),
