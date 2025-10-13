@@ -35,6 +35,10 @@ async function handleConvert() {
 
     // File check
     if (!file) return showNotification('Please choose an Excel file', 'warn');
+
+    // Show loading screen and hide setup block
+    if (refs.loadingBlock) refs.loadingBlock.classList.remove('hidden');
+    if (refs.setupBlock) refs.setupBlock.classList.add('hidden');
     
     const wb = await readWorkbook(file);
     const sheetName = wb.SheetNames[0];
@@ -82,6 +86,10 @@ async function handleConvert() {
     // HTML output
     const outNode = height ? refs.previewBox.firstChild : tableEl;
     refs.outputBox.value = outNode.outerHTML;
+
+    // Hide loading screen and show results block
+    if (refs.loadingBlock) refs.loadingBlock.classList.add('hidden');
+    if (refs.resultsBlock) refs.resultsBlock.classList.remove('hidden');
 }
 
 bindUI({
