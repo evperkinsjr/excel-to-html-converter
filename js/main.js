@@ -96,9 +96,10 @@ async function handleConvert() {
 
     } catch (error) {
         // FAILURE... if any error occurred in the try block
+        console.log(error);
         
         // Notify user of the error
-        showNotification(`Conversion failed: ${error.message || 'An unknown error occurred.'}`, 'error');
+        showNotification('Conversion failed. The issue is likely with the selected file (corrupted, password-protected, or unsupported format). Please select a different file to continue.', 'error');
 
         // Reset
         resetUI(refs, false);
