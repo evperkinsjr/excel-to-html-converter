@@ -40,7 +40,7 @@ async function handleConvert() {
     clearNotifications();
 
     // File check
-    if (!file) return showNotification('Please choose an Excel file', 'warn');
+    if (!file) return showNotification('Please choose an Excel file.', 'warn');
 
     // Show loading screen and hide setup block
     if (refs.loadingBlock) refs.loadingBlock.classList.remove('hidden');

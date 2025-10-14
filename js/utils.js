@@ -107,7 +107,7 @@ export function sanitizeCssSize(value) {
 export function copyToClipboard(text) {
     if (!text) return;
     navigator.clipboard.writeText(text).then(
-        () => showNotification('HTML copied to clipboard', 'success'),
+        () => showNotification('HTML copied to clipboard.', 'success'),
         () => showNotification('Copy failed. Please select and copy manually.', 'error')
     );
 }
