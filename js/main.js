@@ -98,7 +98,7 @@ async function handleConvert() {
         showNotification(`Conversion failed: ${error.message || 'An unknown error occurred.'}`, 'error');
 
         // Reset
-        resetUI(refs);
+        resetUI(refs, false);
 
     } finally {
         // Hide loading screen regardless of success or failure
@@ -108,7 +108,7 @@ async function handleConvert() {
 
 bindUI({
     onChange: handleFileChange,
-    onReset: () => resetUI(refs),
+    onReset: () => resetUI(refs, true),
     onConvert: handleConvert,
     onCopy: () => copyToClipboard(refs.outputBox.value),
     refs

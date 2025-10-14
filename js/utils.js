@@ -47,18 +47,23 @@ export function isValidExcelFile(file) {
     return validExcelExtensions.some(ext => fileName.endsWith(ext));
 }
 
-// Reset
-export function resetUI(refs) {
+// Reset (partial or full)
+export function resetUI(refs, isFullReset = true) {
+    // Always
     if (refs.file) refs.file.value = '';
-    if (refs.width) refs.width.value = '';
-    if (refs.height) refs.height.value = '';
-    if (refs.theme) refs.theme.value = 'unstyled';
-    if (refs.enableSearch) refs.enableSearch.checked = false;
     if (refs.previewBox) refs.previewBox.innerHTML = '';
     if (refs.outputBox) refs.outputBox.value = '';
     if (refs.setupBlock) refs.setupBlock.classList.remove('hidden');
     if (refs.loadingBlock) refs.loadingBlock.classList.add('hidden');
     if (refs.resultsBlock) refs.resultsBlock.classList.add('hidden');
+
+    // Only if user hits Reset button
+    if (isFullReset) {
+        if (refs.width) refs.width.value = '';
+        if (refs.height) refs.height.value = '';
+        if (refs.theme) refs.theme.value = 'unstyled';
+        if (refs.enableSearch) refs.enableSearch.checked = false;
+    }
 }
 
 // Load CSS file based on selected theme
