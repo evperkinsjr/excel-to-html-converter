@@ -39,57 +39,71 @@ async function handleConvert() {
     // Show loading screen and hide setup block
     if (refs.loadingBlock) refs.loadingBlock.classList.remove('hidden');
     if (refs.setupBlock) refs.setupBlock.classList.add('hidden');
-    
-    const wb = await readWorkbook(file);
-    const sheetName = wb.SheetNames[0];
-    const sheet = wb.Sheets[sheetName];
-    const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, blankrows: false });
 
-    //Store selected theme
-    const selectedTheme = refs.theme.value;
+    try {
+        const wb = await readWorkbook(file);
+        const sheetName = wb.SheetNames[0];
+        const sheet = wb.Sheets[sheetName];
+        const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, blankrows: false });
 
-    // Load external assets based on selected theme
-    loadThemeAssets(selectedTheme);
+        //Store selected theme
+        const selectedTheme = refs.theme.value;
 
-    const { tableEl, htmlString } = rowsToHTMLTable(rows, {
-        searchable: refs.enableSearch.checked,
-        theme: selectedTheme
-    });
+        // Load external assets based on selected theme
+        loadThemeAssets(selectedTheme);
 
-    // apply formatting style (theme)
-    applyTheme(tableEl, selectedTheme);
+        const { tableEl, htmlString } = rowsToHTMLTable(rows, {
+            searchable: refs.enableSearch.checked,
+            theme: selectedTheme
+        });
 
-    // table size dimensions
-    const width = sanitizeCssSize(refs.width.value);
-    const height = sanitizeCssSize(refs.height.value);
-    tableEl.style.width = width;
+        // apply formatting style (theme)
+        applyTheme(tableEl, selectedTheme);
 
-    // Determine the element that holds the table (in case it's wrapped)
-    const previewTable = tableEl.tagName === 'TABLE' ? tableEl : tableEl.querySelector('table');
+        // table size dimensions
+        const width = sanitizeCssSize(refs.width.value);
+        const height = sanitizeCssSize(refs.height.value);
+        tableEl.style.width = width;
 
-    // Make the preview table sortable
-    makeTableSortable(previewTable);
+        // Determine the element that holds the table (in case it's wrapped)
+        const previewTable = tableEl.tagName === 'TABLE' ? tableEl : tableEl.querySelector('table');
 
-    // Insert into preview box
-    if (height) {
-        const wrapper = document.createElement('div');
-        wrapper.style.maxHeight = height;
-        wrapper.style.overflow = 'auto';
-        wrapper.appendChild(tableEl);
-        refs.previewBox.innerHTML = '';
-        refs.previewBox.appendChild(wrapper);
-    } else {
-        refs.previewBox.innerHTML = '';
-        refs.previewBox.appendChild(tableEl);
+        // Make the preview table sortable
+        makeTableSortable(previewTable);
+
+        // Insert into preview box
+        if (height) {
+            const wrapper = document.createElement('div');
+            wrapper.style.maxHeight = height;
+            wrapper.style.overflow = 'auto';
+            wrapper.appendChild(tableEl);
+            refs.previewBox.innerHTML = '';
+            refs.previewBox.appendChild(wrapper);
+        } else {
+            refs.previewBox.innerHTML = '';
+            refs.previewBox.appendChild(tableEl);
+        }
+
+        // HTML output
+        const outNode = height ? refs.previewBox.firstChild : tableEl;
+        refs.outputBox.value = outNode.outerHTML;
+
+        // SUCCESS
+        if (refs.resultsBlock) refs.resultsBlock.classList.remove('hidden');
+
+    } catch (error) {
+        // FAILURE... if any error occurred in the try block
+        
+        // Notify user of the error
+        showNotification(`Conversion failed: ${error.message || 'An unknown error occurred.'}`, 'error');
+
+        // Reset
+        resetUI(refs);
+
+    } finally {
+        // Hide loading screen regardless of success or failure
+        if (refs.loadingBlock) refs.loadingBlock.classList.add('hidden');
     }
-
-    // HTML output
-    const outNode = height ? refs.previewBox.firstChild : tableEl;
-    refs.outputBox.value = outNode.outerHTML;
-
-    // Hide loading screen and show results block
-    if (refs.loadingBlock) refs.loadingBlock.classList.add('hidden');
-    if (refs.resultsBlock) refs.resultsBlock.classList.remove('hidden');
 }
 
 bindUI({
