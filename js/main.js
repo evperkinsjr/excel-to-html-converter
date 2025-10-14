@@ -30,6 +30,9 @@ function handleFileChange() {
     }
 }
 
+// Minimum duration (in milliseconds) for the loading screen to be visible
+const MIN_LOADING_TIME_MS = 1000;
+
 async function handleConvert() {
     const file = refs.file.files?.[0];
 
@@ -43,11 +46,21 @@ async function handleConvert() {
     if (refs.loadingBlock) refs.loadingBlock.classList.remove('hidden');
     if (refs.setupBlock) refs.setupBlock.classList.add('hidden');
 
+    const minDelayPromise = new Promise(resolve => setTimeout(resolve, MIN_LOADING_TIME_MS));
+
     try {
-        const wb = await readWorkbook(file);
-        const sheetName = wb.SheetNames[0];
-        const sheet = wb.Sheets[sheetName];
-        const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, blankrows: false });
+        const conversionPromise = (async () => {
+            const wb = await readWorkbook(file);
+            const sheetName = wb.SheetNames[0];
+            const sheet = wb.Sheets[sheetName];
+            const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, blankrows: false });
+
+            // Return data needed for rendering
+            return { rows, sheetName, sheet };
+        })();
+
+        // Wait for BOTH the file conversion AND minimum time delay
+        const [{ rows }] = await Promise.all([conversionPromise, minDelayPromise]);
 
         //Store selected theme
         const selectedTheme = refs.theme.value;
