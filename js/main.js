@@ -2,7 +2,7 @@ import { readWorkbook } from "./fileReader.js";
 import { rowsToHTMLTable } from "./htmlGenerator.js";
 import { applyTheme } from "./tableFormatter.js";
 import { bindUI } from "./uiController.js";
-import { showNotification, isValidExcelFile, resetUI, loadThemeAssets, sanitizeCssSize, copyToClipboard, makeTableSortable } from "./utils.js";
+import { clearNotifications, showNotification, isValidExcelFile, resetUI, loadThemeAssets, sanitizeCssSize, copyToClipboard, makeTableSortable } from "./utils.js";
 
 const refs = {
     setupBlock: document.getElementById('setup-block'),
@@ -32,6 +32,9 @@ function handleFileChange() {
 
 async function handleConvert() {
     const file = refs.file.files?.[0];
+
+    // Clear any stale notifications
+    clearNotifications();
 
     // File check
     if (!file) return showNotification('Please choose an Excel file', 'warn');

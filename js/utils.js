@@ -1,10 +1,15 @@
+// Clear existing notifications
+export function clearNotifications() {
+    const existing = document.querySelector('.custom-notification');
+    if (existing) existing.remove();
+}
+
 // Notify user of something
 export function showNotification(message, type) {
     const notificationContainer = document.body;
     if (!notificationContainer) return;
 
-    const existing = document.querySelector('.custom-notification');
-    if (existing) existing.remove();
+    clearNotifications();
 
     let themeClasses;
     switch (type) {
