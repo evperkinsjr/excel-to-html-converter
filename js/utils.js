@@ -28,6 +28,7 @@ export function showNotification(message, type) {
     }
 
     const alertDiv = document.createElement('div');
+    alertDiv.setAttribute('role', 'alert');
     alertDiv.className = `custom-notification fixed top-4 right-4 z-10 rounded-md p-4 mb-4 text-sm shadow-lg border ${themeClasses} font-medium w-11/12 md:w-1/4 max-w-sm`;
     
     alertDiv.textContent = message;
