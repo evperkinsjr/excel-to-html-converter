@@ -14,16 +14,16 @@ export function showNotification(message, type) {
     let themeClasses;
     switch (type) {
         case 'error':
-            themeClasses = 'bg-red-900 text-red-100 border-red-300';
+            themeClasses = 'bg-red-700 text-white border-red-500';
             break;
         case 'success':
-            themeClasses = 'bg-green-900 text-green-100 border-green-300';
+            themeClasses = 'bg-green-600 text-white border-green-400';
             break;
         case 'warn':
-            themeClasses = 'bg-yellow-300 text-yellow-900 border-yellow-300';
+            themeClasses = 'bg-yellow-500 text-gray-900 border-yellow-700';
             break;
         default:
-            themeClasses = 'bg-blue-900 text-blue-100 border-blue-300';
+            themeClasses = 'bg-blue-600 text-white border-blue-400';
             break;
     }
 
