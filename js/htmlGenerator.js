@@ -33,6 +33,7 @@ export function rowsToHTMLTable(rows, { searchable = false } = {}) {
         const input = document.createElement('input');
         input.type = 'search';
         input.placeholder = 'Search table...';
+        input.setAttribute('aria-label', 'Search table');
         input.addEventListener('input', () => {
             const q = input.value.toLowerCase();
             for (const row of tbody.rows) {
