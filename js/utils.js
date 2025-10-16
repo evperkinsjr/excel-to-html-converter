@@ -130,7 +130,8 @@ export function makeTableSortable(table) {
     const headers = table.querySelectorAll('th');
     
     headers.forEach((header, columnIndex) => {
-        header.style.cursor = 'pointer'; 
+        header.style.cursor = 'pointer';
+        header.setAttribute('aria-sort', 'none'); // Set initial state for screen readers
         header.setAttribute('data-sort-direction', 'none'); // 'none', 'asc', or 'desc'
 
         header.addEventListener('click', () => {
@@ -141,12 +142,17 @@ export function makeTableSortable(table) {
             let direction = header.getAttribute('data-sort-direction');
 
             const newDirection = (direction === 'asc' || direction === 'none') ? 'desc' : 'asc';
+            const newAriaSort = newDirection === 'asc' ? 'ascending' : 'descending'; // map to ARIA values
 
             // Clear sorting indicators from all headers
-            table.querySelectorAll('th').forEach(th => th.removeAttribute('data-sort-direction'));
+            table.querySelectorAll('th').forEach(th => {
+                th.removeAttribute('data-sort-direction');
+                th.setAttribute('aria-sort', 'none');
+            });
             
             // Set new direction on current header
             header.setAttribute('data-sort-direction', newDirection);
+            header.setAttribute('aria-sort', newAriaSort);
 
             // Sorting logic
             rows.sort((rowA, rowB) => {
