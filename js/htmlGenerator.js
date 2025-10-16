@@ -28,6 +28,11 @@ export function rowsToHTMLTable(rows, { searchable = false } = {}) {
     table.appendChild(thead);
     table.appendChild(tbody);
 
+    // Caption
+    const caption = document.createElement('caption');
+    caption.textContent = 'Data converted from Excel spreadsheet';
+    table.prepend(caption);
+
     // Optional - search input
     if (searchable) {
         const input = document.createElement('input');
