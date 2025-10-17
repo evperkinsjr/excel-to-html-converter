@@ -65,12 +65,18 @@ async function handleConvert() {
         //Store selected theme
         const selectedTheme = refs.theme.value;
 
+        // Strip file file extension
+        const fullFileName = file.name;
+        const lastDotIndex = fullFileName.lastIndexOf('.');
+        const baseFileName = lastDotIndex > 0 ? fullFileName.slice(0, lastDotIndex) : fullFileName;
+
         // Load external assets based on selected theme
         loadThemeAssets(selectedTheme);
 
         const { tableEl, htmlString } = rowsToHTMLTable(rows, {
             searchable: refs.enableSearch.checked,
-            theme: selectedTheme
+            theme: selectedTheme,
+            fileName: baseFileName
         });
 
         // apply formatting style (theme)

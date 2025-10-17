@@ -6,7 +6,7 @@ function createCell(tag, text) {
     return el;
 }
 
-export function rowsToHTMLTable(rows, { searchable = false } = {}) {
+export function rowsToHTMLTable(rows, { searchable = false, fileName = 'Data converted from spreadsheet' } = {}) {
     if (!rows || !rows.length) return showNotification('We couldn\'t find any data rows in this worksheet.', 'error');
     const table = document.createElement('table');
     const thead = document.createElement('thead');
@@ -30,7 +30,7 @@ export function rowsToHTMLTable(rows, { searchable = false } = {}) {
 
     // Caption
     const caption = document.createElement('caption');
-    caption.textContent = 'Data converted from Excel spreadsheet';
+    caption.textContent = fileName;
     table.prepend(caption);
 
     // Optional - search input
