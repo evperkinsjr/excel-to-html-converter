@@ -2,7 +2,7 @@ import { readWorkbook } from "./fileReader.js";
 import { rowsToHTMLTable } from "./htmlGenerator.js";
 import { applyTheme } from "./tableFormatter.js";
 import { bindUI } from "./uiController.js";
-import { clearNotifications, showNotification, isValidExcelFile, resetUI, loadThemeAssets, sanitizeCssSize, copyToClipboard, makeTableSortable } from "./utils.js";
+import { clearNotifications, showNotification, isValidExcelFile, resetUI, loadThemeAssets, sanitizeCssSize, copyToClipboard, makeTableSortable, toggleModal } from "./utils.js";
 
 const refs = {
     setupBlock: document.getElementById('setup-block'),
@@ -137,5 +137,6 @@ bindUI({
     onReset: () => resetUI(refs, true),
     onConvert: handleConvert,
     onCopy: () => copyToClipboard(refs.outputBox.value),
+    onToggleModal: () => toggleModal(refs),
     refs
 });

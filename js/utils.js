@@ -169,3 +169,27 @@ export function makeTableSortable(table) {
         });
     });
 }
+
+// Toggle modal visibility
+export function toggleModal(refs) {
+    const modal = refs.themeHelpModal;
+    const infoButton = refs.themeInfoBtn;
+    const closeButton = refs.modalCloseBtn;
+
+    // Check if modal is currently hidden
+    const isHidden = modal.classList.contains('hidden');
+
+    if (isHidden) {
+        // Open modal
+        modal.classList.remove('hidden');
+        infoButton.setAttribute('aria-expanded', 'true');
+        // Set focus to close button
+        closeButton.focus();
+    } else {
+        // Close modal
+        modal.classList.add('hidden');
+        infoButton.setAttribute('aria-expanded', 'false');
+        // Restore focus to the info button (trigger)
+        infoButton.focus();
+    }
+}
