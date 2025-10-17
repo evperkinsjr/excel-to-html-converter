@@ -68,7 +68,7 @@ async function handleConvert() {
         //Store selected theme
         const selectedTheme = refs.theme.value;
 
-        // Strip file file extension
+        // Get file name and remove extension
         const fullFileName = file.name;
         const lastDotIndex = fullFileName.lastIndexOf('.');
         const baseFileName = lastDotIndex > 0 ? fullFileName.slice(0, lastDotIndex) : fullFileName;
