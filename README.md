@@ -50,7 +50,7 @@ Built with modular JavaScript and styled with [Tailwind CSS](https://tailwindcss
 
 ## 📸 Demo Preview
 
-<img src="" alt="Excel to HTML Converter Screenshot" width="100%">
+<img src="./assets/excel-to-html-converter-demo.gif" alt="Excel to HTML Converter Screenshot">
 
 > *Note: Preview sorting is powered by the USWDS library and only works within the app. Exported HTML is static unless you include your own table-sorting JavaScript.*
 
