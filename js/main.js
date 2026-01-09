@@ -1,3 +1,7 @@
+// Primary application controller.
+// Manages file intake + validation flow, app state/config,
+// and coordinates parsing, formatting, and rendering modules.
+
 import { readWorkbook } from "./fileReader.js";
 import { rowsToHTMLTable } from "./htmlGenerator.js";
 import { applyTheme } from "./tableFormatter.js";
