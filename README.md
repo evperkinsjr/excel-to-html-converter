@@ -81,8 +81,9 @@ This project requires a local server due to browser restrictions when reading fi
 ```
 excel-to-html-converter/
 ├── index.html
-├── styles.css
-├── uswds-preview.css
+├── css
+│   ├── styles.css
+│   ├── uswds-preview.css
 ├── js/
 │   ├── main.js
 │   ├── fileReader.js
@@ -90,8 +91,10 @@ excel-to-html-converter/
 │   ├── tableFormatter.js
 │   ├── uiController.js
 │   └── utils.js
-└── examples/
-    └── sample.xlsx
+└── samples/
+    ├── valid-sample.xlsx     # Demonstrates expected application behavior
+    └── blank-invalid.xlsx    # Intentionally triggers validation and error handling
+
 ```
 
 Each JS module handles a specific responsibility — allowing for easy maintenance, extension, or testing.
