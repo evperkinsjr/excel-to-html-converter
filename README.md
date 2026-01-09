@@ -11,6 +11,8 @@ This tool helps users upload an `.xlsx` file, extract data, and convert it into 
 
 Built with modular JavaScript and styled with [Tailwind CSS](https://tailwindcss.com/), the application also offers scoped integration of [USWDS](https://designsystem.digital.gov/) for developers working on U.S. federal projects.
 
+This project was built to eliminate repetitive manual table formatting and to demonstrate clean, modular frontend architecture with deliberate input validation and error handling.
+
 ---
 
 ## ✨ Features
@@ -85,7 +87,7 @@ excel-to-html-converter/
 │   ├── styles.css
 │   ├── uswds-preview.css
 ├── js/
-│   ├── main.js
+│   ├── main.js               # Serves as the primary application controller
 │   ├── fileReader.js
 │   ├── htmlGenerator.js
 │   ├── tableFormatter.js
