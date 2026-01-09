@@ -110,6 +110,20 @@ Each JS module handles a specific responsibility — allowing for easy maintenan
 
 ---
 
+## 🔐 Security Notes
+
+This application is intentionally designed as a **client-side–only tool** with a minimal attack surface:
+
+- All spreadsheet parsing happens locally in the browser
+- Files are never uploaded, stored, or transmitted to a server
+- Explicit file-type validation is performed before processing
+- Empty, malformed, or corrupted spreadsheets are handled gracefully
+- No external network requests are made during parsing or rendering
+
+These choices follow a least-privilege approach and help ensure user data remains private and under the user’s control.
+
+---
+
 ## 🛠 Deployment
 
 This app is designed to run as a **static site**, making it ideal for:
