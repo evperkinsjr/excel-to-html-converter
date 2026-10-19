@@ -120,6 +120,15 @@ async function handleConvert() {
         // SUCCESS
         if (refs.resultsBlock) refs.resultsBlock.classList.remove('hidden');
 
+        // Analytics: successful conversion
+        window.dataLayer = window.dataLayer || [];
+
+        window.dataLayer.push({
+            event: 'converter_used',
+            theme: selectedTheme,
+            search_enabled: refs.enableSearch.checked
+        });
+
     } catch (error) {
         // FAILURE... if any error occurred in the try block
         console.log(error);
